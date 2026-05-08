@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --background: #111111;
+  --foreground: #FFFFF0;
+  --matte-black: #111111;
+  --charcoal: #1C1C1C;
+  --warm-beige: #F5F5DC;
+  --soft-ivory: #FFFFF0;
+  --walnut: #5C4033;
+  --gold: #D4AF37;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-matte-black: var(--matte-black);
+  --color-charcoal: var(--charcoal);
+  --color-warm-beige: var(--warm-beige);
+  --color-soft-ivory: var(--soft-ivory);
+  --color-walnut: var(--walnut);
+  --color-gold: var(--gold);
+  --font-sans: "Inter", var(--font-geist-sans);
+  --font-heading: "Oswald", var(--font-geist-sans);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
