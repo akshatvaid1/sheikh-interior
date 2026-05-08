@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 
 import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 
 export const useSmoothScroll = () => {
   useEffect(() => {
@@ -12,7 +12,6 @@ export const useSmoothScroll = () => {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
     });
@@ -29,5 +28,3 @@ export const useSmoothScroll = () => {
     };
   }, []);
 };
-
-
