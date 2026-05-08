@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -40,14 +40,15 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        scrolled ? "bg-matte-black/90 backdrop-blur-md py-4 shadow-xl" : "bg-transparent py-8"
+        scrolled || isOpen ? "bg-matte-black/95 backdrop-blur-md py-4 shadow-xl" : "bg-transparent py-6 md:py-8"
       }`}
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-heading text-soft-ivory tracking-tighter">
+        <Link href="/" className="text-xl md:text-2xl font-heading text-soft-ivory tracking-tighter shrink-0">
           SHEIKH <span className="text-gold">INTERIORS</span>
         </Link>
 
+        {/* Desktop Links */}
         <div className="hidden md:flex gap-8 items-center">
           {navLinks.map((link) => (
             <a
@@ -68,29 +69,40 @@ const Navbar = () => {
           </a>
         </div>
 
-        <button className="md:hidden text-soft-ivory" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
+        {/* Mobile Toggle */}
+        <button className="md:hidden text-soft-ivory p-2" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full bg-charcoal p-8 flex flex-col gap-6 md:hidden"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="absolute top-full left-0 w-full bg-charcoal overflow-hidden md:hidden border-t border-white/5"
           >
-            {navLinks.map((link) => (
+            <div className="flex flex-col p-8 gap-6">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => scrollToSection(e, link.href)}
+                  className="text-base uppercase tracking-widest border-b border-white/5 pb-2"
+                >
+                  {link.name}
+                </a>
+              ))}
               <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => scrollToSection(e, link.href)}
-                className="text-lg uppercase tracking-widest"
+                href="#contact"
+                onClick={(e) => scrollToSection(e, "#contact")}
+                className="mt-4 px-6 py-4 bg-gold text-matte-black text-center text-xs uppercase tracking-widest font-bold"
               >
-                {link.name}
+                Book Consultation
               </a>
-            ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
